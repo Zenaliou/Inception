@@ -28,7 +28,7 @@ Tout ça est orchestré par **docker-compose**, un outil qui lit un fichier `.ym
 ### Un Dockerfile basique
 
 ```dockerfile
-FROM debian:bullseye           # image de base
+FROM debian:bookworm           # image de base
 RUN apt-get install -y nginx   # installe des paquets
 COPY conf/nginx.conf /etc/     # copie ta config
 CMD ["nginx", "-g", "daemon off;"]  # démarre le service
@@ -76,20 +76,20 @@ Ils se joignent par leur **nom de service** (ex: `mariadb`, `wordpress`).
 
 ### Étape 1 — MariaDB
 La plus simple. Tu dois :
-1. Partir de `debian:bullseye`
+1. Partir de `debian:bookworm`
 2. Installer `mariadb-server`
 3. Créer la base de données, l'utilisateur, le mot de passe via un script shell
 4. Démarrer avec `mysqld`
 
 ### Étape 2 — WordPress
-1. Partir de `debian:bullseye`
+1. Partir de `debian:bookworm`
 2. Installer `php-fpm` + les extensions PHP nécessaires
 3. Télécharger WordPress avec `wp-cli`
 4. Le configurer pour se connecter à MariaDB (via variables d'env)
 5. Démarrer `php-fpm` sur le port 9000
 
 ### Étape 3 — NGINX
-1. Partir de `debian:bullseye`
+1. Partir de `debian:bookworm`
 2. Installer `nginx` + `openssl`
 3. Générer un certificat SSL auto-signé
 4. Écrire la config pour écouter en HTTPS et proxy vers WordPress
