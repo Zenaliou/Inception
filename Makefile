@@ -1,21 +1,22 @@
 COMPOSE_FILE = srcs/docker-compose.yml
 DATA_DIR = /home/$(shell whoami)/data
+COMPOSE = docker compose
 
 all: setup
-	docker-compose -f $(COMPOSE_FILE) up --build -d
+	$(COMPOSE) -f $(COMPOSE_FILE) up --build -d
 
 setup:
 	@mkdir -p $(DATA_DIR)/wordpress
 	@mkdir -p $(DATA_DIR)/mariadb
 
 down:
-	docker-compose -f $(COMPOSE_FILE) down
+	$(COMPOSE) -f $(COMPOSE_FILE) down
 
 stop:
-	docker-compose -f $(COMPOSE_FILE) stop
+	$(COMPOSE) -f $(COMPOSE_FILE) stop
 
 start:
-	docker-compose -f $(COMPOSE_FILE) start
+	$(COMPOSE) -f $(COMPOSE_FILE) start
 
 clean: down
 	docker system prune -af
