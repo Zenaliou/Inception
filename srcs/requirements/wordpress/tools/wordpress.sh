@@ -4,6 +4,11 @@ set -e
 
 WP_PATH="/var/www/html"
 
+# Read passwords from Docker secrets
+MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
+WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
+
 # Wait for MariaDB to be ready
 echo "Waiting for MariaDB..."
 until mariadb -h"${MYSQL_HOST}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -e "SELECT 1;" > /dev/null 2>&1; do
